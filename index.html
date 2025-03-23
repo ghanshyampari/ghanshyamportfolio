@@ -5,6 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ghanshyam Parihar Portfolio</title>
   <style>
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      overflow: hidden;
+      width: 100%;
+      margin: 20px auto;
+      position: relative;
+    }
+    .carousel-container {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .carousel img {
+      height: 400px;
+      width: auto;
+      margin: 5px;
+      border-radius: 8px;
+    }
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .carousel-button:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+    .prev {
+      left: 10px;
+    }
+    .next {
+      right: 10px;
+    }
+  </style>
+  <script>
+    let currentIndex = 0;
+    function slide(direction, carouselId) {
+      const container = document.getElementById(carouselId);
+      const items = container.children.length;
+      const itemsToShow = 3;
+      currentIndex = (currentIndex + direction + items) % items;
+      const offset = currentIndex * (100 / itemsToShow);
+      container.style.transform = `translateX(-${offset}%)`;
+    }
+  </script>
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      overflow: hidden;
+      width: 100%;
+      margin: 20px auto;
+      position: relative;
+    }
+    .carousel-container {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .carousel img {
+      height: 400px;
+      width: auto;
+      margin: 5px;
+      border-radius: 8px;
+    }
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .carousel-button:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+    .prev {
+      left: 10px;
+    }
+    .next {
+      right: 10px;
+    }
+  </style>
+  <script>
+    let currentIndex = 0;
+    function slide(direction, carouselId) {
+      const container = document.getElementById(carouselId);
+      const items = container.children.length;
+      currentIndex = (currentIndex + direction + items) % items;
+      container.style.transform = `translateX(-${currentIndex * 300}px)`;
+    }
+  </script>
     .slider {
       width: 100%;
       height: 400px;
@@ -40,7 +142,7 @@
       height: 400px;
       object-fit: contain;
       position: absolute;
-      /* animation: swipe 17s infinite; */
+      animation: swipe 17s infinite;
     }
     @keyframes swipe {
       0% { opacity: 0; transform: translateX(100%); }
@@ -189,40 +291,53 @@
       <li>Push Notifications and Crashlytics</li>
     </ul>
   <h4>📱 BeBestTherapy App Screenshots</h4>
-    <marquee class="slider">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/1.png" alt="BeBestTherapy Screen 1">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/2.png" alt="BeBestTherapy Screen 2">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/3.png" alt="BeBestTherapy Screen 3">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/4.jpg" alt="BeBestTherapy Screen 4">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/5.jpg" alt="BeBestTherapy Screen 5">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/6.jpg" alt="BeBestTherapy Screen 6">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/7.jpg" alt="BeBestTherapy Screen 7">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/8.jpg" alt="BeBestTherapy Screen 8">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/9.jpg" alt="BeBestTherapy Screen 9">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/10.png" alt="BeBestTherapy Screen 10">
-    </marquee>
+    <div class="carousel">
+      <button class="carousel-button prev" onclick="slide(-1, 'bebesttherapy')">&#10094;</button>
+      <div id="bebesttherapy" class="carousel-container">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/1.png" alt="BeBestTherapy Screen 1">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/2.png" alt="BeBestTherapy Screen 2">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/3.png" alt="BeBestTherapy Screen 3">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/4.jpg" alt="BeBestTherapy Screen 4">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/5.jpg" alt="BeBestTherapy Screen 5">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/6.jpg" alt="BeBestTherapy Screen 6">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/7.jpg" alt="BeBestTherapy Screen 7">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/8.jpg" alt="BeBestTherapy Screen 8">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/9.jpg" alt="BeBestTherapy Screen 9">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/10.png" alt="BeBestTherapy Screen 10">
+      </div>
+      <button class="carousel-button next" onclick="slide(1, 'bebesttherapy')">&#10095;</button>
+    </div>
 
     <h4>📱 BaruNet App Screenshots</h4>
-    <marquee class="slider">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/1.jpg" alt="BaruNet Screen 1">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/2.png" alt="BaruNet Screen 2">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/3.png" alt="BaruNet Screen 3">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/4.png" alt="BaruNet Screen 4">
-    </marquee>
+    <div class="carousel">
+      <button class="carousel-button prev" onclick="slide(-1, 'barunet')">&#10094;</button>
+      <div id="barunet" class="carousel-container">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/1.jpg" alt="BaruNet Screen 1">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/2.png" alt="BaruNet Screen 2">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/3.png" alt="BaruNet Screen 3">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/4.png" alt="BaruNet Screen 4">
+      </div>
+      <button class="carousel-button next" onclick="slide(1, 'barunet')">&#10095;</button>
+    </div>
 
     <h4>📱 NirmolakHeera App Screenshots</h4>
-    <marquee class="slider">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/1.jpg" alt="NirmolakHeera Screen 1">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/2.jpg" alt="NirmolakHeera Screen 2">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/3.jpg" alt="NirmolakHeera Screen 3">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/4.jpg" alt="NirmolakHeera Screen 4">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/5.jpg" alt="NirmolakHeera Screen 5">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/6.jpg" alt="NirmolakHeera Screen 6">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/7.jpg" alt="NirmolakHeera Screen 7">
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/8.jpg" alt="NirmolakHeera Screen 8">
-    </marquee>
-  </section>
+    <div class="carousel">
+      <button class="carousel-button prev" onclick="slide(-1, 'nirmolakheera')">&#10094;</button>
+      <div id="nirmolakheera" class="carousel-container">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/1.jpg" alt="NirmolakHeera Screen 1">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/2.jpg" alt="NirmolakHeera Screen 2">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/3.jpg" alt="NirmolakHeera Screen 3">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/4.jpg" alt="NirmolakHeera Screen 4">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/5.jpg" alt="NirmolakHeera Screen 5">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/6.jpg" alt="NirmolakHeera Screen 6">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/7.jpg" alt="NirmolakHeera Screen 7">
+        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/8.jpg" alt="NirmolakHeera Screen 8">
+      </div>
+      <button class="carousel-button next" onclick="slide(1, 'nirmolakheera')">&#10095;</button>
+    </div>
 
+    </section>
+    
   <section>
     <h2>Contact</h2>
     <p>Email: ghanshyamparihar@gmail.com</p>
