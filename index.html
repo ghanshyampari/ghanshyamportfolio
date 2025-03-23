@@ -99,12 +99,12 @@
     }
   </style>
   <script>
-    let currentIndex = 0;
+    let currentIndex1 = 0;
     function slide(direction, carouselId) {
       const container = document.getElementById(carouselId);
       const items = container.children.length;
-      currentIndex = (currentIndex + direction + items) % items;
-      container.style.transform = `translateX(-${currentIndex * 300}px)`;
+      currentIndex1 = (currentIndex1 + direction + items) % items;
+      container.style.transform = `translateX(-${currentIndex1 * 300}px)`;
     }
   </script>
     .slider {
@@ -337,7 +337,7 @@
     </div>
 
     </section>
-    
+
   <section>
     <h2>Contact</h2>
     <p>Email: ghanshyamparihar@gmail.com</p>
