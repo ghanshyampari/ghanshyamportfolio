@@ -45,18 +45,6 @@
     .next {
       right: 10px;
     }
-  </style>
-  <script>
-    let currentIndex = 0;
-    function slide(direction, carouselId) {
-      const container = document.getElementById(carouselId);
-      const items = container.children.length;
-      const itemsToShow = 3;
-      currentIndex = (currentIndex + direction + items) % items;
-      const offset = currentIndex * (100 / itemsToShow);
-      container.style.transform = `translateX(-${offset}%)`;
-    }
-  </script>
     .carousel {
       display: flex;
       align-items: center;
@@ -97,16 +85,6 @@
     .next {
       right: 10px;
     }
-  </style>
-  <script>
-    let currentIndex1 = 0;
-    function slide(direction, carouselId) {
-      const container = document.getElementById(carouselId);
-      const items = container.children.length;
-      currentIndex1 = (currentIndex1 + direction + items) % items;
-      container.style.transform = `translateX(-${currentIndex1 * 300}px)`;
-    }
-  </script>
     .slider {
       width: 100%;
       height: 400px;
@@ -218,6 +196,18 @@
       margin-top: 20px;
     }
   </style>
+
+<script>
+    let currentIndex = 0;
+    function slide(direction, carouselId) {
+      const container = document.getElementById(carouselId);
+      const items = container.children.length;
+      const itemsToShow = 3;
+      currentIndex = (currentIndex + direction + items) % items;
+      const offset = currentIndex * (100 / itemsToShow);
+      container.style.transform = `translateX(-${offset}%)`;
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -337,7 +327,7 @@
     </div>
 
     </section>
-
+    
   <section>
     <h2>Contact</h2>
     <p>Email: ghanshyamparihar@gmail.com</p>
