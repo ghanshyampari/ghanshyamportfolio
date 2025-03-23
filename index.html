@@ -202,17 +202,15 @@
     function slide(direction, carouselId) {
       const container = document.getElementById(carouselId);
       const items = container.children.length;
-      const itemsToShow = 3;
       currentIndex = (currentIndex + direction + items) % items;
-      const offset = currentIndex * (100 / itemsToShow);
-      container.style.transform = `translateX(-${offset}%)`;
+      container.style.transform = `translateX(-${currentIndex * 300}px)`;
     }
   </script>
 </head>
 <body>
   <header>
     <h1>Ghanshyam Parihar Portfolio</h1>
-    <p>Mobile App Developer | React Native | Android | iOS</p>
+    <p>Mobile App Developer | React Native | Android | iOS | Web</p>
   </header>
 
   <section>
