@@ -15,27 +15,46 @@
       .neuropol-text {
         font-family: "Neuropol", sans-serif;
       }
+      .carousel {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        overflow: hidden;
+        width: 100%;
+        max-width: 800px; /* Adjust as per your need */
+        margin: 20px auto;
+        position: relative;
+      }
 
-      .carousel {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        overflow: hidden;
-        width: 100%;
-        margin: 20px auto;
-        position: relative;
-      }
       .carousel-container {
         display: flex;
         transition: transform 0.5s ease;
+        will-change: transform;
       }
+
       .carousel img {
         height: 400px;
         width: auto;
         margin: 5px;
         border-radius: 8px;
+        flex-shrink: 0;
+        padding: 0px 10px 0px 12px;
+        opacity: 0; /* Default hidden */
+        transition: opacity 0.3s ease;
       }
+
+      /* Center image (highlighted) */
+      .carousel img.active {
+        opacity: 1;
+        transform: scale(1.1); /* Slightly larger */
+      }
+
+      /* Left and right images */
+      .carousel img.visible {
+        opacity: 0.5;
+      }
+
+      /* Buttons */
       .carousel-button {
         position: absolute;
         top: 50%;
@@ -47,54 +66,19 @@
         cursor: pointer;
         border-radius: 50%;
       }
+
       .carousel-button:hover {
         background-color: rgba(0, 0, 0, 0.8);
       }
+
       .prev {
         left: 10px;
+        z-index: 999;
       }
+
       .next {
         right: 10px;
-      }
-      .carousel {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        overflow: hidden;
-        width: 100%;
-        margin: 20px auto;
-        position: relative;
-      }
-      .carousel-container {
-        display: flex;
-        transition: transform 0.5s ease;
-      }
-      .carousel img {
-        height: 400px;
-        width: auto;
-        margin: 5px;
-        border-radius: 8px;
-      }
-      .carousel-button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        border-radius: 50%;
-      }
-      .carousel-button:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-      }
-      .prev {
-        left: 10px;
-      }
-      .next {
-        right: 10px;
+        z-index: 999;
       }
       .slider {
         width: 100%;
@@ -232,60 +216,184 @@
         padding: 15px;
         margin-top: 20px;
       }
+      #imageModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      #modalImg {
+        max-width: 90%;
+        max-height: 90%;
+      }
     </style>
 
     <script>
-      let currentIndex = 0;
-      function slide(direction, carouselId) {
+      function setupCarousel(carouselId) {
         const container = document.getElementById(carouselId);
-        const items = container.children.length;
-        currentIndex = (currentIndex + direction + items) % items;
-        container.style.transform = `translateX(-${currentIndex * 300}px)`;
+        const originalImages = Array.from(container.children);
+        const totalItems = originalImages.length;
+
+        // Duplicate images for infinite loop
+        originalImages.forEach((img) => {
+          const clone1 = img.cloneNode(true);
+          const clone2 = img.cloneNode(true);
+          container.appendChild(clone1); // Add at the end
+          container.insertBefore(clone2, originalImages[0]); // Add at the start
+        });
+
+        let currentIndex = totalItems; // Start from the original set (after clones)
+
+        function updateCarousel() {
+          const itemWidth = container.children[0].offsetWidth + 10; // Width + margin
+          const centerOffset =
+            (container.parentElement.offsetWidth - itemWidth) / 2;
+          const items = container.children;
+
+          // Move the carousel
+          container.style.transition = "transform 0.5s ease";
+          container.style.transform = `translateX(${
+            centerOffset - currentIndex * itemWidth
+          }px)`;
+
+          // Update visibility
+          for (let i = 0; i < items.length; i++) {
+            items[i].classList.remove("active", "visible");
+            if (i === currentIndex) {
+              items[i].classList.add("active"); // Center
+            } else if (i === currentIndex - 1 || i === currentIndex + 1) {
+              items[i].classList.add("visible"); // Left or right
+            }
+          }
+
+          // Reset position for infinite loop
+          if (currentIndex >= totalItems * 2) {
+            setTimeout(() => {
+              container.style.transition = "none"; // Disable transition for reset
+              currentIndex = totalItems; // Reset to original set
+              container.style.transform = `translateX(${
+                centerOffset - currentIndex * itemWidth
+              }px)`;
+            }, 500); // Match transition duration
+          } else if (currentIndex < totalItems) {
+            setTimeout(() => {
+              container.style.transition = "none";
+              currentIndex = totalItems * 2 - 1; // Reset to end of original set
+              container.style.transform = `translateX(${
+                centerOffset - currentIndex * itemWidth
+              }px)`;
+            }, 500);
+          }
+        }
+
+        function slide(direction) {
+          currentIndex += direction;
+          updateCarousel();
+        }
+
+        // Initial setup
+        updateCarousel();
+
+        // Attach event listeners to buttons
+        document
+          .querySelector(`#${carouselId}`)
+          .parentElement.querySelector(".prev").onclick = () => slide(-1);
+        document
+          .querySelector(`#${carouselId}`)
+          .parentElement.querySelector(".next").onclick = () => slide(1);
       }
+
+      // Initialize all carousels
+      window.onload = () => {
+        setupCarousel("bebesttherapy");
+        setupCarousel("barunet");
+        setupCarousel("nirmolakheera");
+      };
     </script>
   </head>
   <body>
     <header>
-      <div style="
+      <div
+        style="
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: 10px;
-        "></div>
-      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/logo.png" alt="Logo" style="height: 90px; position: absolute; top: 10px; left: 26px; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));">
-      <div style="position: absolute; top: 94px; left: 28px; color: color(srgb 0.2817 0.1744 0.4486); text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-0 0 20px rgba(207, 208, 230, 1);">
-        <p style="
+        "
+      ></div>
+      <img
+        src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/logo.png"
+        alt="Logo"
+        style="
+          height: 90px;
+          position: absolute;
+          top: 10px;
+          left: 26px;
+          filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+        "
+      />
+      <div
+        style="
+          position: absolute;
+          top: 94px;
+          left: 28px;
+          color: color(srgb 0.2817 0.1744 0.4486);
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(207, 208, 230, 1);
+        "
+      >
+        <p
+          style="
             font-size: 2em;
             font-weight: bold;
             margin: 0;
             line-height: 0.9;
             display: inline;
             color: color(srgb 0.3174 0.2104 0.4486);
-          " class="neuropol-text">
+          "
+          class="neuropol-text"
+        >
           ssam
         </p>
-        <p style="
+        <p
+          style="
             font-size: 0.7em;
             font-weight: bold;
             line-height: 0.9;
             display: inline;
             vertical-align: top;
             color: rgb(11, 162, 245);
-          ">
+          "
+        >
           ®
         </p>
-        <p style="font-size: 0.67em; font-weight: normal; margin: 0; color: rgb(35, 172, 252);">
+        <p
+          style="
+            font-size: 0.67em;
+            font-weight: normal;
+            margin: 0;
+            color: rgb(35, 172, 252);
+          "
+        >
           Consultancy Services
         </p>
       </div>
-      <div style="
+      <div
+        style="
           text-align: center;
           width: 100%;
           text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
             0 0 20px rgba(255, 255, 255, 0.6);
-        ">
-        <h1 style="margin-bottom: 10px" >Ghanshyam Parihar - Developer Portfolio</h1>
+        "
+      >
+        <h1 style="margin-bottom: 10px">
+          Ghanshyam Parihar - Developer Portfolio
+        </h1>
         <p style="font-size: 1.2em; margin: 0">
           Mobile App Developer | React Native | Android | iOS | Web
         </p>
@@ -391,52 +499,63 @@
         <li>API Integration in the entire app</li>
         <li>Push Notifications and Crashlytics</li>
       </ul>
+
       <h4>📱 BeBestTherapy App Screenshots</h4>
       <div class="carousel">
         <button
           class="carousel-button prev"
           onclick="slide(-1, 'bebesttherapy')"
         >
-          &#10094;
+          ❮
         </button>
         <div id="bebesttherapy" class="carousel-container">
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/1.png')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/1.png"
             alt="BeBestTherapy Screen 1"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/2.png')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/2.png"
             alt="BeBestTherapy Screen 2"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/3.png')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/3.png"
             alt="BeBestTherapy Screen 3"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/4.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/4.jpg"
             alt="BeBestTherapy Screen 4"
           />
-          <img
+          <!-- <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/5.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/5.jpg"
             alt="BeBestTherapy Screen 5"
-          />
+          /> -->
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/6.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/6.jpg"
             alt="BeBestTherapy Screen 6"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/7.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/7.jpg"
             alt="BeBestTherapy Screen 7"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/8.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/8.jpg"
             alt="BeBestTherapy Screen 8"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/9.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/9.jpg"
             alt="BeBestTherapy Screen 9"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/10.png')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/10.png"
             alt="BeBestTherapy Screen 10"
           />
@@ -445,7 +564,7 @@
           class="carousel-button next"
           onclick="slide(1, 'bebesttherapy')"
         >
-          &#10095;
+          ❯
         </button>
       </div>
 
@@ -456,18 +575,22 @@
         </button>
         <div id="barunet" class="carousel-container">
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/1.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/1.jpg"
             alt="BaruNet Screen 1"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/2.png')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/2.png"
             alt="BaruNet Screen 2"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/3.png')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/3.png"
             alt="BaruNet Screen 3"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/4.png')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/4.png"
             alt="BaruNet Screen 4"
           />
@@ -487,34 +610,42 @@
         </button>
         <div id="nirmolakheera" class="carousel-container">
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/1.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/1.jpg"
             alt="NirmolakHeera Screen 1"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/2.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/2.jpg"
             alt="NirmolakHeera Screen 2"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/3.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/3.jpg"
             alt="NirmolakHeera Screen 3"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/4.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/4.jpg"
             alt="NirmolakHeera Screen 4"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/5.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/5.jpg"
             alt="NirmolakHeera Screen 5"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/6.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/6.jpg"
             alt="NirmolakHeera Screen 6"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/7.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/7.jpg"
             alt="NirmolakHeera Screen 7"
           />
           <img
+            onclick="viewImage('https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/8.jpg')"
             src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/8.jpg"
             alt="NirmolakHeera Screen 8"
           />
@@ -544,9 +675,24 @@
         </p>
       </div>
     </section>
-
+    <div id="imageModal" onclick="closeModal()">
+      <img id="modalImg" />
+    </div>
     <footer>
       <p>© 2025 Ghanshyam Parihar. All rights reserved.</p>
     </footer>
+    <script>
+      function viewImage(src) {
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImg");
+        modalImg.src = src;
+        modal.style.display = "flex";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "none";
+      }
+    </script>
   </body>
 </html>
