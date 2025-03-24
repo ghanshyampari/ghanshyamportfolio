@@ -1,344 +1,552 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ghanshyam Parihar Portfolio</title>
-  <style>
-    .carousel {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      overflow: hidden;
-      width: 100%;
-      margin: 20px auto;
-      position: relative;
-    }
-    .carousel-container {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-    .carousel img {
-      height: 400px;
-      width: auto;
-      margin: 5px;
-      border-radius: 8px;
-    }
-    .carousel-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0,0,0,0.5);
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 50%;
-    }
-    .carousel-button:hover {
-      background-color: rgba(0,0,0,0.8);
-    }
-    .prev {
-      left: 10px;
-    }
-    .next {
-      right: 10px;
-    }
-    .carousel {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      overflow: hidden;
-      width: 100%;
-      margin: 20px auto;
-      position: relative;
-    }
-    .carousel-container {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-    .carousel img {
-      height: 400px;
-      width: auto;
-      margin: 5px;
-      border-radius: 8px;
-    }
-    .carousel-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0,0,0,0.5);
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 50%;
-    }
-    .carousel-button:hover {
-      background-color: rgba(0,0,0,0.8);
-    }
-    .prev {
-      left: 10px;
-    }
-    .next {
-      right: 10px;
-    }
-    .slider {
-      width: 100%;
-      height: 400px;
-      margin: 20px auto;
-      overflow: hidden;
-      position: relative;
-      border-radius: 8px;
-    }
-    .slider img {
-      width: 100%;
-      height: 400px;
-      object-fit: contain;
-      position: absolute;
-      animation: swipe 3s infinite ease-in-out;
-    }
-    @keyframes swipe {
-      0% { opacity: 0; transform: translateX(100%); }
-      20% { opacity: 1; transform: translateX(0); }
-      80% { opacity: 1; transform: translateX(0); }
-      100% { opacity: 0; transform: translateX(-100%); }
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ghanshyam Parihar Portfolio</title>
+    <style>
+      @font-face {
+        font-family: "Neuropol";
+        src: url("./fonts/Neuropol.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
 
-    .slider {
-      width: 100%;
-      height: 400px;
-      margin: 20px auto;
-      overflow: hidden;
-      position: relative;
-      border-radius: 8px;
-    }
-    .slider img {
-      width: 100%;
-      height: 400px;
-      object-fit: contain;
-      position: absolute;
-      animation: swipe 17s infinite;
-    }
-    @keyframes swipe {
-      0% { opacity: 0; transform: translateX(100%); }
-      5% { opacity: 1; transform: translateX(0); }
-      25% { opacity: 1; transform: translateX(0); }
-      30% { opacity: 0; transform: translateX(-100%); }
-    }
+      .neuropol-text {
+        font-family: "Neuropol", sans-serif;
+      }
 
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-    header p {
-      font-size: 1.2em;
-      margin-top: 5px;
-      letter-spacing: 1px;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    }
+      .carousel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        overflow: hidden;
+        width: 100%;
+        margin: 20px auto;
+        position: relative;
+      }
+      .carousel-container {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+      .carousel img {
+        height: 400px;
+        width: auto;
+        margin: 5px;
+        border-radius: 8px;
+      }
+      .carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+      .carousel-button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .prev {
+        left: 10px;
+      }
+      .next {
+        right: 10px;
+      }
+      .carousel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        overflow: hidden;
+        width: 100%;
+        margin: 20px auto;
+        position: relative;
+      }
+      .carousel-container {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+      .carousel img {
+        height: 400px;
+        width: auto;
+        margin: 5px;
+        border-radius: 8px;
+      }
+      .carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+      .carousel-button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .prev {
+        left: 10px;
+      }
+      .next {
+        right: 10px;
+      }
+      .slider {
+        width: 100%;
+        height: 400px;
+        margin: 20px auto;
+        overflow: hidden;
+        position: relative;
+        border-radius: 8px;
+      }
+      .slider img {
+        width: 100%;
+        height: 400px;
+        object-fit: contain;
+        position: absolute;
+        animation: swipe 3s infinite ease-in-out;
+      }
+      @keyframes swipe {
+        0% {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        20% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        80% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(-100%);
+        }
+      }
 
-  header {
-      background: linear-gradient(135deg, #4c00ff, #1e90ff);
-      color: white;
-      padding: 50px 20px;
-      text-align: center;
-      border-bottom: 5px solid #fff;
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 3em;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    section {
-      padding: 20px;
-      margin: 15px auto;
-      background-color: white;
-      max-width: 800px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 5px;
-      margin-bottom: 15px;
-      color: #333;
-    }
-    ul {
-      margin: 10px 0;
-      padding: 0 20px;
-    }
-    li {
-      margin: 8px 0;
-      list-style-type: square;
-    }
-    .contact-links a {
-      color: #007bff;
-      text-decoration: none;
-    }
-    .contact-links a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 20px;
-    }
-  </style>
+      .slider {
+        width: 100%;
+        height: 400px;
+        margin: 20px auto;
+        overflow: hidden;
+        position: relative;
+        border-radius: 8px;
+      }
+      .slider img {
+        width: 100%;
+        height: 400px;
+        object-fit: contain;
+        position: absolute;
+        animation: swipe 17s infinite;
+      }
+      @keyframes swipe {
+        0% {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        5% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        25% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        30% {
+          opacity: 0;
+          transform: translateX(-100%);
+        }
+      }
 
-<script>
-    let currentIndex = 0;
-    function slide(direction, carouselId) {
-      const container = document.getElementById(carouselId);
-      const items = container.children.length;
-      currentIndex = (currentIndex + direction + items) % items;
-      container.style.transform = `translateX(-${currentIndex * 300}px)`;
-    }
-  </script>
-</head>
-<body>
-  <header>
-    <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/logo.png" alt="Logo" style="height: 50px;">
-    <h1>Ghanshyam Parihar Portfolio</h1>
-    <p>Mobile App Developer | React Native | Android | iOS | Web</p>
-  </header>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+      header p {
+        font-size: 1.2em;
+        margin-top: 5px;
+        letter-spacing: 1px;
+        color: black;
+        text-shadow: 1px 1px 3px rgba(28, 22, 22, 0.3);
+      }
 
-  <section>
-    <h2>About Me</h2>
-    <p>Passionate app and web developer with over 8 years of experience delivering innovative solutions for clients. I specialize in building web portals, applications, websites, admin panels, and APIs, combining my expertise to bring unique value to the organization.</p>
-    <p>Location: Mandsaur, M.P.</p>
-  </section>
+      header {
+        background: linear-gradient(to top, #f9f9fb, #fbfbfb 87.82%);
+        color: white;
+        padding: 15px 20px;
+        text-align: center;
+        border-bottom: 5px solid #fff;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 3em;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(135, 134, 134, 0.3);
+        color: rgb(4, 2, 2);
+      }
+      section {
+        padding: 20px;
+        margin: 15px auto;
+        background-color: white;
+        max-width: 800px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+      ul {
+        margin: 10px 0;
+        padding: 0 20px;
+      }
+      li {
+        margin: 8px 0;
+        list-style-type: square;
+      }
+      .contact-links a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      .contact-links a:hover {
+        text-decoration: underline;
+      }
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 20px;
+      }
+    </style>
 
-  <section>
-    <h2>Skills</h2>
-    <ul>
-      <li>React Native</li>
-      <li>Android Development</li>
-      <li>iOS Development</li>
-      <li>Firebase</li>
-      <li>App Center CI/CD</li>
-      <li>Fastlane Automation</li>
-      <li>PHP, CodeIgniter, JavaScript</li>
-      <li>Node.js</li>
-      <li>MySQL</li>
-      <li>Git, VSCode, XCode, Android Studio</li>
-      <li>Zoom SDK</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Experience</h2>
-    <h3>Ssam Consultancy Services (May 2023 - Present)</h3>
-    <p>Freelancer Software Engineer - Developed mobile applications (Android) with robust API integration, ensuring high performance and security compliance.</p>
-    <h3>Pixler IT Solutions (May 2022 - May 2023)</h3>
-    <p>Sr. Developer - Built and launched iOS/Android apps with API integration and social media login. Managed CI/CD pipelines and maintained app stability through unit testing and bug tracking tools.</p>
-    <h3>Reflom IT Solutions (Nov 2020 - April 2022)</h3>
-    <p>React Native App Team Leader - Led mobile app projects and ensured code quality, implemented agile methodologies, and managed CI/CD pipelines for smooth deployment.</p>
-    <h3>Inspire Infotech (Feb 2016 - June 2019)</h3>
-    <p>PHP Developer - Built web apps using PHP and CodeIgniter, enhanced UI/UX, and optimized database performance.</p>
-  </section>
-
-  <section>
-    <h2>Education</h2>
-    <p>Bachelor of Engineering in Information Technology - Rajiv Gandhi Technical University, Bhopal (2005 - 2009)</p>
-    <p>Higher Secondary - Government School of Excellence, Mandsaur (2004 - 2005)</p>
-    <p>High School - Govt. Boys School No. 2, Mandsaur (2002 - 2003)</p>
-  </section>
-
-  <section>
-    <h2>Projects</h2>
-    <h3>BeBestTherapy App</h3>
-    <p>React Native | Features: In-app purchase, API integration, Fastlane Automation</p>
-    <ul>
-      <li>Implemented flexible subscription management</li>
-      <li>Automated build and deployment using Fastlane</li>
-      <li>Managed dynamic UI components for subscription plans</li>
-    </ul>
-    <h3>BaruNet App</h3>
-    <p>React Native, SQLite | Features: YouTube streaming, Offline Sunder Gutka Reading</p>
-    <ul>
-      <li>Real-time YouTube streaming</li>
-      <li>Offline Sunder Gutka Reading with interactive UI</li>
-      <li>Crash Analytics integration</li>
-    </ul>
-    <h3>NirmolakHeera App</h3>
-    <p>React Native, Firebase | Features: MP3 Player, Push Notifications, API Integrations</p>
-    <ul>
-      <li>Frontend Design - All screens including MP3 player</li>
-      <li>API Integration in the entire app</li>
-      <li>Push Notifications and Crashlytics</li>
-    </ul>
-  <h4>📱 BeBestTherapy App Screenshots</h4>
-    <div class="carousel">
-      <button class="carousel-button prev" onclick="slide(-1, 'bebesttherapy')">&#10094;</button>
-      <div id="bebesttherapy" class="carousel-container">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/1.png" alt="BeBestTherapy Screen 1">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/2.png" alt="BeBestTherapy Screen 2">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/3.png" alt="BeBestTherapy Screen 3">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/4.jpg" alt="BeBestTherapy Screen 4">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/5.jpg" alt="BeBestTherapy Screen 5">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/6.jpg" alt="BeBestTherapy Screen 6">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/7.jpg" alt="BeBestTherapy Screen 7">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/8.jpg" alt="BeBestTherapy Screen 8">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/9.jpg" alt="BeBestTherapy Screen 9">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/10.png" alt="BeBestTherapy Screen 10">
+    <script>
+      let currentIndex = 0;
+      function slide(direction, carouselId) {
+        const container = document.getElementById(carouselId);
+        const items = container.children.length;
+        currentIndex = (currentIndex + direction + items) % items;
+        container.style.transform = `translateX(-${currentIndex * 300}px)`;
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <div style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+        "></div>
+      <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/logo.png" alt="Logo" style="height: 90px; position: absolute; top: 10px; left: 26px; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));">
+      <div style="position: absolute; top: 94px; left: 28px; color: color(srgb 0.2817 0.1744 0.4486); text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+0 0 20px rgba(207, 208, 230, 1);">
+        <p style="
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0;
+            line-height: 0.9;
+            display: inline;
+            color: color(srgb 0.3174 0.2104 0.4486);
+          " class="neuropol-text">
+          ssam
+        </p>
+        <p style="
+            font-size: 0.7em;
+            font-weight: bold;
+            line-height: 0.9;
+            display: inline;
+            vertical-align: top;
+            color: rgb(11, 162, 245);
+          ">
+          ®
+        </p>
+        <p style="font-size: 0.67em; font-weight: normal; margin: 0; color: rgb(35, 172, 252);">
+          Consultancy Services
+        </p>
       </div>
-      <button class="carousel-button next" onclick="slide(1, 'bebesttherapy')">&#10095;</button>
-    </div>
-
-    <h4>📱 BaruNet App Screenshots</h4>
-    <div class="carousel">
-      <button class="carousel-button prev" onclick="slide(-1, 'barunet')">&#10094;</button>
-      <div id="barunet" class="carousel-container">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/1.jpg" alt="BaruNet Screen 1">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/2.png" alt="BaruNet Screen 2">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/3.png" alt="BaruNet Screen 3">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/4.png" alt="BaruNet Screen 4">
+      <div style="
+          text-align: center;
+          width: 100%;
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(255, 255, 255, 0.6);
+        ">
+        <h1 style="margin-bottom: 10px">Ghanshyam Parihar - Developer Portfolio</h1>
+        <p style="font-size: 1.2em; margin: 0">
+          Mobile App Developer | React Native | Android | iOS | Web
+        </p>
       </div>
-      <button class="carousel-button next" onclick="slide(1, 'barunet')">&#10095;</button>
-    </div>
-
-    <h4>📱 NirmolakHeera App Screenshots</h4>
-    <div class="carousel">
-      <button class="carousel-button prev" onclick="slide(-1, 'nirmolakheera')">&#10094;</button>
-      <div id="nirmolakheera" class="carousel-container">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/1.jpg" alt="NirmolakHeera Screen 1">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/2.jpg" alt="NirmolakHeera Screen 2">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/3.jpg" alt="NirmolakHeera Screen 3">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/4.jpg" alt="NirmolakHeera Screen 4">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/5.jpg" alt="NirmolakHeera Screen 5">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/6.jpg" alt="NirmolakHeera Screen 6">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/7.jpg" alt="NirmolakHeera Screen 7">
-        <img src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/8.jpg" alt="NirmolakHeera Screen 8">
-      </div>
-      <button class="carousel-button next" onclick="slide(1, 'nirmolakheera')">&#10095;</button>
-    </div>
-
+    </header>
+    <section>
+      <h2>About Me</h2>
+      <p>
+        Passionate app and web developer with over 8 years of experience
+        delivering innovative solutions for clients. I specialize in building
+        web portals, applications, websites, admin panels, and APIs, combining
+        my expertise to bring unique value to the organization.
+      </p>
+      <p>Location: Mandsaur, M.P.</p>
     </section>
-    
-  <section>
-    <h2>Contact</h2>
-    <p>Email: ghanshyamparihar@gmail.com</p>
-    <div class="contact-links">
-      <p>LinkedIn: <a href="https://linkedin.com">linkedin.com/in/ghanshyamparihar</a></p>
-      <p>GitHub: <a href="https://github.com/ghanshyampari">github.com/ghanshyampari</a></p>
-    </div>
-  </section>
 
-  <footer>
-    <p>© 2025 Ghanshyam Parihar. All rights reserved.</p>
-  </footer>
-</body>
+    <section>
+      <h2>Skills</h2>
+      <ul>
+        <li>React Native</li>
+        <li>Android Development</li>
+        <li>iOS Development</li>
+        <li>Firebase</li>
+        <li>App Center CI/CD</li>
+        <li>Fastlane Automation</li>
+        <li>PHP, CodeIgniter, JavaScript</li>
+        <li>Node.js</li>
+        <li>MySQL</li>
+        <li>Git, VSCode, XCode, Android Studio</li>
+        <li>Zoom SDK</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <h3>Ssam Consultancy Services (May 2023 - Present)</h3>
+      <p>
+        Freelancer Software Engineer - Developed mobile applications (Android)
+        with robust API integration, ensuring high performance and security
+        compliance.
+      </p>
+      <h3>Pixler IT Solutions (May 2022 - May 2023)</h3>
+      <p>
+        Sr. Developer - Built and launched iOS/Android apps with API integration
+        and social media login. Managed CI/CD pipelines and maintained app
+        stability through unit testing and bug tracking tools.
+      </p>
+      <h3>Reflom IT Solutions (Nov 2020 - April 2022)</h3>
+      <p>
+        React Native App Team Leader - Led mobile app projects and ensured code
+        quality, implemented agile methodologies, and managed CI/CD pipelines
+        for smooth deployment.
+      </p>
+      <h3>Inspire Infotech (Feb 2016 - June 2019)</h3>
+      <p>
+        PHP Developer - Built web apps using PHP and CodeIgniter, enhanced
+        UI/UX, and optimized database performance.
+      </p>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <p>
+        Bachelor of Engineering in Information Technology - Rajiv Gandhi
+        Technical University, Bhopal (2005 - 2009)
+      </p>
+      <p>
+        Higher Secondary - Government School of Excellence, Mandsaur (2004 -
+        2005)
+      </p>
+      <p>High School - Govt. Boys School No. 2, Mandsaur (2002 - 2003)</p>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <h3>BeBestTherapy App</h3>
+      <p>
+        React Native | Features: In-app purchase, API integration, Fastlane
+        Automation
+      </p>
+      <ul>
+        <li>Implemented flexible subscription management</li>
+        <li>Automated build and deployment using Fastlane</li>
+        <li>Managed dynamic UI components for subscription plans</li>
+      </ul>
+      <h3>BaruNet App</h3>
+      <p>
+        React Native, SQLite | Features: YouTube streaming, Offline Sunder Gutka
+        Reading
+      </p>
+      <ul>
+        <li>Real-time YouTube streaming</li>
+        <li>Offline Sunder Gutka Reading with interactive UI</li>
+        <li>Crash Analytics integration</li>
+      </ul>
+      <h3>NirmolakHeera App</h3>
+      <p>
+        React Native, Firebase | Features: MP3 Player, Push Notifications, API
+        Integrations
+      </p>
+      <ul>
+        <li>Frontend Design - All screens including MP3 player</li>
+        <li>API Integration in the entire app</li>
+        <li>Push Notifications and Crashlytics</li>
+      </ul>
+      <h4>📱 BeBestTherapy App Screenshots</h4>
+      <div class="carousel">
+        <button
+          class="carousel-button prev"
+          onclick="slide(-1, 'bebesttherapy')"
+        >
+          &#10094;
+        </button>
+        <div id="bebesttherapy" class="carousel-container">
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/1.png"
+            alt="BeBestTherapy Screen 1"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/2.png"
+            alt="BeBestTherapy Screen 2"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/3.png"
+            alt="BeBestTherapy Screen 3"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/4.jpg"
+            alt="BeBestTherapy Screen 4"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/5.jpg"
+            alt="BeBestTherapy Screen 5"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/6.jpg"
+            alt="BeBestTherapy Screen 6"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/7.jpg"
+            alt="BeBestTherapy Screen 7"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/8.jpg"
+            alt="BeBestTherapy Screen 8"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/9.jpg"
+            alt="BeBestTherapy Screen 9"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BeBestTherapy/android/10.png"
+            alt="BeBestTherapy Screen 10"
+          />
+        </div>
+        <button
+          class="carousel-button next"
+          onclick="slide(1, 'bebesttherapy')"
+        >
+          &#10095;
+        </button>
+      </div>
+
+      <h4>📱 BaruNet App Screenshots</h4>
+      <div class="carousel">
+        <button class="carousel-button prev" onclick="slide(-1, 'barunet')">
+          &#10094;
+        </button>
+        <div id="barunet" class="carousel-container">
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/1.jpg"
+            alt="BaruNet Screen 1"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/2.png"
+            alt="BaruNet Screen 2"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/3.png"
+            alt="BaruNet Screen 3"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/BaruNet/android/4.png"
+            alt="BaruNet Screen 4"
+          />
+        </div>
+        <button class="carousel-button next" onclick="slide(1, 'barunet')">
+          &#10095;
+        </button>
+      </div>
+
+      <h4>📱 NirmolakHeera App Screenshots</h4>
+      <div class="carousel">
+        <button
+          class="carousel-button prev"
+          onclick="slide(-1, 'nirmolakheera')"
+        >
+          &#10094;
+        </button>
+        <div id="nirmolakheera" class="carousel-container">
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/1.jpg"
+            alt="NirmolakHeera Screen 1"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/2.jpg"
+            alt="NirmolakHeera Screen 2"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/3.jpg"
+            alt="NirmolakHeera Screen 3"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/4.jpg"
+            alt="NirmolakHeera Screen 4"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/5.jpg"
+            alt="NirmolakHeera Screen 5"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/6.jpg"
+            alt="NirmolakHeera Screen 6"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/7.jpg"
+            alt="NirmolakHeera Screen 7"
+          />
+          <img
+            src="https://ghanshyampari.github.io/Ghanshyam-Parihar-Portfolio/images/NirmolakHeera/android/8.jpg"
+            alt="NirmolakHeera Screen 8"
+          />
+        </div>
+        <button
+          class="carousel-button next"
+          onclick="slide(1, 'nirmolakheera')"
+        >
+          &#10095;
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>Email: ghanshyamparihar@gmail.com</p>
+      <div class="contact-links">
+        <p>
+          LinkedIn:
+          <a href="https://linkedin.com">linkedin.com/in/ghanshyamparihar</a>
+        </p>
+        <p>
+          GitHub:
+          <a href="https://github.com/ghanshyampari"
+            >github.com/ghanshyampari</a
+          >
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Ghanshyam Parihar. All rights reserved.</p>
+    </footer>
+  </body>
 </html>
-
